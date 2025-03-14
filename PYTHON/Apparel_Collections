@@ -1,0 +1,40 @@
+import datetime
+
+
+saree_prices = {
+    "Green": 12500,
+    "White with red border": 18750,
+    "Golden": 26250,
+    "Sky blue": 11250,
+    "Pink": 7500
+}
+
+
+saree_name = input("Enter saree name: ")
+
+
+if saree_name in saree_prices:
+    
+    date_input = input("Enter the current date (MM/DD): ")
+    month = int(date_input.split("/")[0])
+    
+    if 1 <= month <= 12:
+       
+        if 10 <= month <= 12 or 1 <= month <= 3: 
+            profit_margin = 0.50
+        else:  
+            profit_margin = 0.25
+        
+        
+        base_price = saree_prices[saree_name]
+        final_price = base_price + (base_price * profit_margin)
+        
+       
+        print(f"Saree: {saree_name}")
+        print(f"Base Price: Rs. {base_price}")
+        print(f"Profit Margin: {int(profit_margin * 100)}%")
+        print(f"Final Price: Rs. {int(final_price)}")
+    else:
+        print("Invalid month entered. Please enter a valid date in MM/DD format.")
+else:
+    print("Saree not found in the wedding collection.")
