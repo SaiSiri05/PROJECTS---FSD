@@ -1,5 +1,4 @@
-# PROJECTS---FSD
-oys = {
+toys = {
     "Car": 499,
     "Barbie": 749,
     "Avengers": 1999,
@@ -10,31 +9,38 @@ oys = {
 cart = {}
 
 
-def display_toys():
-    print("\nAvailable Toys:")
-    for toy, price in toys.items():
-        print(f"{toy} - Rs.{price}")
-
-
-def display_cart():
-    if not cart:
-        print("\nYour cart is empty.")
-    else:
-        total = 0
-        print("\nYour Cart:")
-        for toy, quantity in cart.items():
-            price = toys[toy] * quantity
-            total += price
-            print(f"{toy} - {quantity} x Rs.{toys[toy]} = Rs.{price}")
-        print(f"Total Payable Amount: Rs.{total}")
-        return total
-    return 0
-
-
 def shopping():
     while True:
-        display_toys()
+        print("\nAvailable Toys:")
+        for toy, price in toys.items():
+            print(f"{toy} - Rs.{price}")
+
         choice = input("\nEnter toy name to add to cart, 'cart' to view cart, or 'exit' to leave: ")
 
-        if choice == 'exit' :
+        if choice == 'exit':
             print("Exiting from the application.")
+            break
+        elif choice == 'cart':
+            if not cart:
+                print("\nYour cart is empty.")
+            else:
+                total = 0
+                print("\nYour Cart:")
+                for toy, quantity in cart.items():
+                    price = toys[toy] * quantity
+                    total += price
+                    print(f"{toy} - {quantity} x Rs.{toys[toy]} = Rs.{price}")
+                print(f"Total Payable Amount: Rs.{total}")
+                action = input("Type 'pay' to proceed with payment or 'exit' to leave: ")
+                if action == "pay":
+                    print("Payment successful! Thank you for shopping.")
+                    cart.clear()
+        elif choice in toys:
+            quantity = int(input(f"Enter quantity for {choice}: "))
+            cart[choice] = cart.get(choice, 0) + quantity
+            print(f"{choice} added to cart with quantity {cart[choice]}.")
+        else:
+            print("Invalid input! Please enter a valid toy name.")
+
+
+shopping()
